@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3178/3178197.png">
-    <title>Prova Bíblica | Neemias 1-8</title>
+    <title>Neemias: A Reconstrução</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #f39c12; /* Cor de ouro/areia para remeter a Jerusalém */
-            --secondary: #e67e22;
-            --success: #00b894;
-            --danger: #d63031;
-            --bg: #1a1a2e;
-            --glass: rgba(255, 255, 255, 0.08);
+            --neon-gold: #ffce00;
+            --neon-orange: #ff5e00;
+            --accent-cyan: #00f2ff;
+            --glass-bright: rgba(255, 255, 255, 0.15);
+            --bg-dark: #05050a;
         }
 
         * {
@@ -23,290 +22,281 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            color: white;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            background: radial-gradient(circle at top right, #1e1b4b, #050505);
+            color: #fff;
             margin: 0;
             padding: 15px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
         }
 
+        /* Container com efeito de vidro mais vivo */
         .quiz-container {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            max-width: 650px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 30px 20px;
             width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
             margin: auto;
         }
 
         h1 {
             text-align: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             text-transform: uppercase;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            background: linear-gradient(to right, #ffd700, #f39c12);
+            background: linear-gradient(to bottom, var(--neon-gold), var(--neon-orange));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255, 150, 0, 0.5));
         }
 
         .user-section {
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 206, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 206, 0, 0.1);
         }
 
         input[type="text"] {
             width: 100%;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--neon-gold);
+            border-radius: 12px;
+            color: #fff;
             font-size: 1rem;
             outline: none;
-            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 15px var(--neon-gold);
         }
 
         .question {
             background: rgba(255, 255, 255, 0.03);
-            margin-bottom: 18px;
-            padding: 18px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .question p {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            color: #bdc3c7;
-            line-height: 1.5;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
         label {
             display: flex;
             align-items: center;
-            margin: 8px 0;
-            cursor: pointer;
-            padding: 12px;
-            border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
-            transition: 0.2s;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
 
-        label:active { background: var(--primary); }
+        /* Efeito de brilho ao selecionar ou passar o mouse */
+        label:active {
+            background: rgba(0, 242, 255, 0.15);
+            border-color: var(--accent-cyan);
+            transform: scale(0.98);
+        }
 
         input[type="radio"] {
-            margin-right: 12px;
-            accent-color: var(--primary);
-            width: 20px;
-            height: 20px;
+            accent-color: var(--accent-cyan);
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
         }
 
-        button.btn-finish {
+        .btn-finish {
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
+            padding: 22px;
+            background: linear-gradient(45deg, var(--neon-orange), var(--neon-gold));
             border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 20px;
+            color: #000;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
             cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 100, 0, 0.4);
+            transition: 0.3s;
         }
 
-        /* MODAL */
+        .btn-finish:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 100, 0, 0.6);
+        }
+
+        /* MODAL NEON */
         .modal {
             display: none;
             position: fixed;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
             padding: 20px;
         }
 
         .modal-content {
-            background: #1a1a2e;
-            margin: 15% auto;
+            background: #0a0a0f;
+            margin: 20% auto;
             padding: 40px 20px;
-            border-radius: 25px;
-            width: 100%;
-            max-width: 400px;
+            border-radius: 30px;
             text-align: center;
-            border: 2px solid var(--primary);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+            animation: emerge 0.5s ease-out;
         }
 
         #nota-final {
-            font-size: 70px;
-            font-weight: bold;
+            font-size: 90px;
+            font-weight: 800;
             display: block;
             margin: 10px 0;
+            text-shadow: 0 0 30px currentColor;
         }
 
+        @keyframes emerge {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsividade Desktop */
         @media (min-width: 768px) {
-            h1 { font-size: 2rem; }
-            .quiz-container { padding: 40px; }
-            label:hover { background: rgba(255, 255, 255, 0.15); }
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            h1 { font-size: 2.5rem; }
+            label:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.3); }
         }
     </style>
 </head>
 <body>
 
     <div class="quiz-container">
-        <h1>🏗️ Prova: Neemias (Cap. 1-8)</h1>
+        <h1>🏗️ Neemias 1-8</h1>
         
         <div class="user-section">
-            <p style="margin:0; font-weight: bold;">Você é o(a)?:</p>
-            <input type="text" id="nome-aluno" placeholder="Digite seu nome completo...">
+            <p style="margin:0 0 10px 0; font-weight: 600; color: var(--neon-gold);">NOME DO TRABALHADOR:</p>
+            <input type="text" id="nome-aluno" placeholder="Quem vai reconstruir os muros?">
         </div>
 
         <form id="quiz-form">
-            <!-- Q1 -->
+            <!-- As questões agora têm IDs claros para o JS -->
             <div class="question">
-                <p>1. Qual era a ocupação de Neemias antes de ir para Jerusalém? (Ne 1:11)</p>
-                <label><input type="radio" name="q1" value="0"> Sacerdote</label>
+                <p>1. Qual era a função de Neemias no palácio? (Ne 1:11)</p>
                 <label><input type="radio" name="q1" value="1"> Copeiro do Rei</label>
-                <label><input type="radio" name="q1" value="0"> Escriba</label>
+                <label><input type="radio" name="q1" value="0"> Guarda da Porta</label>
             </div>
 
-            <!-- Q2 -->
             <div class="question">
-                <p>2. Quem era o rei que Neemias servia em Susã? (Ne 2:1)</p>
-                <label><input type="radio" name="q2" value="0"> Ciro</label>
-                <label><input type="radio" name="q2" value="1"> Artaxerxes</label>
-                <label><input type="radio" name="q2" value="0"> Dario</label>
+                <p>2. Em que cidade Neemias estava quando soube de Jerusalém? (Ne 1:1)</p>
+                <label><input type="radio" name="q2" value="1"> Susã</label>
+                <label><input type="radio" name="q2" value="0"> Babilônia</label>
             </div>
 
-            <!-- Q3 -->
             <div class="question">
-                <p>3. Qual era o principal objetivo de Neemias ao ir para Jerusalém? (Ne 2:5)</p>
-                <label><input type="radio" name="q3" value="1"> Reedificar os muros</label>
-                <label><input type="radio" name="q3" value="0"> Cobrar impostos</label>
-                <label><input type="radio" name="q3" value="0"> Nomear novos juízes</label>
+                <p>3. Qual o nome do rei que permitiu a viagem? (Ne 2:1)</p>
+                <label><input type="radio" name="q3" value="1"> Artaxerxes</label>
+                <label><input type="radio" name="q3" value="0"> Nabucodonosor</label>
             </div>
 
-            <!-- Q4 -->
             <div class="question">
-                <p>4. Quem foram os dois principais opositores que zombaram do início da obra? (Ne 2:19)</p>
-                <label><input type="radio" name="q4" value="1"> Sambalate e Tobias</label>
-                <label><input type="radio" name="q4" value="0"> Esdras e Hanani</label>
-                <label><input type="radio" name="q4" value="0"> Gesém e Eliatã</label>
+                <p>4. Quanto tempo Neemias levou para inspecionar os muros à noite antes de avisar os líderes? (Ne 2:11)</p>
+                <label><input type="radio" name="q4" value="1"> 3 dias</label>
+                <label><input type="radio" name="q4" value="0"> 7 dias</label>
             </div>
 
-            <!-- Q5 -->
             <div class="question">
-                <p>5. Por causa das ameaças, como os trabalhadores trabalhavam? (Ne 4:17)</p>
-                <label><input type="radio" name="q5" value="1"> Com uma mão na obra e outra na arma</label>
-                <label><input type="radio" name="q5" value="0"> Apenas durante a noite</label>
-                <label><input type="radio" name="q5" value="0"> Escondidos em cavernas</label>
+                <p>5. Quem disse: "Ainda que edifiquem, vindo uma raposa, derrubará o seu muro"? (Ne 4:3)</p>
+                <label><input type="radio" name="q5" value="1"> Tobias</label>
+                <label><input type="radio" name="q5" value="0"> Sambalate</label>
             </div>
 
-            <!-- Q6 -->
             <div class="question">
-                <p>6. Neemias não aceitou o salário de governador para não sobrecarregar o povo. Por quantos anos ele foi governador? (Ne 5:14)</p>
-                <label><input type="radio" name="q6" value="0"> 7 anos</label>
-                <label><input type="radio" name="q6" value="1"> 12 anos</label>
-                <label><input type="radio" name="q6" value="0"> 40 anos</label>
+                <p>6. O que os trabalhadores carregavam em uma das mãos enquanto trabalhavam? (Ne 4:17)</p>
+                <label><input type="radio" name="q6" value="1"> Uma arma (espada/lança)</label>
+                <label><input type="radio" name="q6" value="0"> Água</label>
             </div>
 
-            <!-- Q7 -->
             <div class="question">
-                <p>7. Em quantos dias o muro foi finalmente concluído? (Ne 6:15)</p>
-                <label><input type="radio" name="q7" value="1"> 52 dias</label>
-                <label><input type="radio" name="q7" value="0"> 7 dias</label>
-                <label><input type="radio" name="q7" value="0"> 120 dias</label>
+                <p>7. Neemias enfrentou um problema interno sério. Qual era? (Ne 5:1-5)</p>
+                <label><input type="radio" name="q7" value="1"> Exploração de judeus pobres por nobres judeus</label>
+                <label><input type="radio" name="q7" value="0"> Falta de pedras para a obra</label>
             </div>
 
-            <!-- Q8 -->
             <div class="question">
-                <p>8. Quem leu o Livro da Lei para o povo no capítulo 8?</p>
-                <label><input type="radio" name="q8" value="0"> Neemias</label>
-                <label><input type="radio" name="q8" value="1"> Esdras</label>
-                <label><input type="radio" name="q8" value="0"> Josué</label>
+                <p>8. Quantos dias durou a reconstrução do muro? (Ne 6:15)</p>
+                <label><input type="radio" name="q8" value="1"> 52 dias</label>
+                <label><input type="radio" name="q8" value="0"> 40 dias</label>
             </div>
 
-            <!-- Q9 -->
             <div class="question">
-                <p>9. Qual era a atitude do povo ao ouvir a leitura da Lei? (Ne 8:3-6)</p>
-                <label><input type="radio" name="q9" value="1"> Atentos e adorando a Deus</label>
-                <label><input type="radio" name="q9" value="0"> Reclamando do cansaço</label>
-                <label><input type="radio" name="q9" value="0"> Dormindo durante a leitura</label>
+                <p>9. Quem subiu em uma plataforma de madeira para ler a Lei ao povo? (Ne 8:4)</p>
+                <label><input type="radio" name="q9" value="1"> Esdras</label>
+                <label><input type="radio" name="q9" value="0"> Tobias</label>
             </div>
 
-            <!-- Q10 -->
             <div class="question">
-                <p>10. Neemias disse ao povo: "Não vos entristeçais, porque a (...) do Senhor é a vossa força". (Ne 8:10)</p>
-                <label><input type="radio" name="q10" value="1"> Alegria</label>
-                <label><input type="radio" name="q10" value="0"> Mão</label>
-                <label><input type="radio" name="q10" value="0"> Espada</label>
+                <p>10. Qual festa o povo celebrou no capítulo 8, morando em cabanas?</p>
+                <label><input type="radio" name="q10" value="1"> Festa dos Tabernáculos</label>
+                <label><input type="radio" name="q10" value="0"> Páscoa</label>
             </div>
 
-            <button type="button" class="btn-finish" onclick="finalizar()">ENVIAR RESPOSTAS</button>
+            <button type="button" class="btn-finish" onclick="finalizar()">ENTREGAR OBRA</button>
         </form>
     </div>
 
     <div id="modal-result" class="modal">
         <div class="modal-content">
-            <p id="msg-final" style="font-size: 1.3rem; margin: 0;"></p>
+            <p id="msg-final" style="font-size: 1.5rem; color: #fff;"></p>
             <span id="nota-final">0</span>
-            <p id="sub-msg" style="color: #bdc3c7;"></p>
-            <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; width: 100%;">TENTAR NOVAMENTE</button>
+            <p id="sub-msg" style="color: #ccc; margin-bottom: 25px;"></p>
+            <button onclick="location.reload()" style="background: none; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">RECOMEÇAR</button>
         </div>
     </div>
 
     <script>
         function finalizar() {
             const nome = document.getElementById('nome-aluno').value.trim();
-            if (!nome) { 
-                alert("Por favor, identifique-se com seu nome!"); 
-                document.getElementById('nome-aluno').focus();
-                return; 
-            }
+            if (!nome) { alert("Diga seu nome para o registro de Jerusalém!"); return; }
 
             let acertos = 0;
-            const form = document.getElementById('quiz-form');
-            
             for (let i = 1; i <= 10; i++) {
-                const radio = form.querySelector(`input[name="q${i}"]:checked`);
-                if (radio) acertos += parseInt(radio.value);
+                const sel = document.querySelector(`input[name="q${i}"]:checked`);
+                if (sel) acertos += parseInt(sel.value);
             }
 
             const modal = document.getElementById('modal-result');
-            const msgFinal = document.getElementById('msg-final');
-            const notaFinal = document.getElementById('nota-final');
-            const subMsg = document.getElementById('sub-msg');
+            const msg = document.getElementById('msg-final');
+            const nota = document.getElementById('nota-final');
+            const sub = document.getElementById('sub-msg');
 
-            notaFinal.innerText = acertos;
+            nota.innerText = acertos;
 
             if (acertos >= 7) {
-                msgFinal.innerHTML = `🌟 Parabéns, <strong>${nome}</strong>!`;
-                subMsg.innerText = `Sua nota é ${acertos}. Você conhece bem a história de Neemias!`;
-                notaFinal.style.color = "#00b894";
+                msg.innerHTML = `🌟 Parabéns, <strong>${nome}</strong>!`;
+                sub.innerText = `Sua nota foi ${acertos}. Seus estudos são solidos como os muros de Jerusalém!`;
+                nota.style.color = "#00f2ff";
             } else {
-                msgFinal.innerHTML = `Poxa, <strong>${nome}</strong>...`;
-                subMsg.innerText = `Sua nota é ${acertos}. Na próxima prova você pode estudar mais`;
-                notaFinal.style.color = "#d63031";
+                msg.innerHTML = `⚠️ Poxa, <strong>${nome}</strong>...`;
+                sub.innerText = `Sua nota foi ${acertos}. Se comprometa mais com a palavra!`;
+                nota.style.color = "#ff5e00";
             }
 
             modal.style.display = "block";
