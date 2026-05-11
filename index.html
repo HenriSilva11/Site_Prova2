@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neemias: O Desafio das Muralhas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>O Pergaminho de Neemias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --neon-gold: #ffce00;
-            --neon-orange: #ff5e00;
-            --accent-cyan: #00f2ff;
-            --glass-bright: rgba(255, 255, 255, 0.12);
-            --bg-dark: #05050a;
+            --papiro: #e4d5b7;
+            --papiro-dark: #d2b48c;
+            --ink: #2b1e16;
+            --accent: #8b4513;
         }
 
         * {
@@ -21,311 +20,217 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top right, #1e1b4b, #050505);
-            color: #fff;
+            background-color: #1a1a1a;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
             margin: 0;
-            padding: 10px;
-            min-height: 100vh;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
         }
 
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 25px 15px;
+        /* Estética de Pergaminho */
+        .pergaminho {
+            background-color: var(--papiro);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            color: var(--ink);
+            padding: 40px 25px;
             width: 100%;
             max-width: 650px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
-            margin: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8), 
+                        inset 0 0 50px rgba(139, 69, 19, 0.2);
+            position: relative;
+            border: 1px solid var(--papiro-dark);
+            /* Bordas irregulares simuladas */
+            clip-path: polygon(0% 2%, 100% 0%, 99% 98%, 1% 100%);
         }
 
         h1 {
+            font-family: 'Cinzel', serif;
             text-align: center;
-            font-weight: 800;
             font-size: 1.6rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, var(--neon-gold), var(--neon-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 8px rgba(255, 150, 0, 0.4));
+            border-bottom: 2px double var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: var(--accent);
         }
 
-        .user-section {
-            background: rgba(255, 255, 255, 0.05);
+        .user-info {
+            font-family: 'Special Elite', cursive;
+            margin-bottom: 30px;
+            border: 1px dashed var(--accent);
             padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 206, 0, 0.2);
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid var(--neon-gold);
-            border-radius: 10px;
-            color: #fff;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--accent);
+            font-family: 'Special Elite', cursive;
+            font-size: 1.1rem;
+            color: var(--ink);
+            outline: none;
+            padding: 5px;
+        }
+
+        .question-block {
+            margin-bottom: 35px;
+            font-family: 'Special Elite', cursive;
+        }
+
+        .question-block p {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--papiro-dark);
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Special Elite', cursive;
             font-size: 1rem;
+            color: var(--ink);
+            resize: none;
             outline: none;
         }
 
-        .question {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: var(--accent);
         }
 
-        .question p {
-            font-weight: 600;
-            color: var(--accent-cyan);
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-        }
-
-        label {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            margin: 8px 0;
-            padding: 12px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid transparent;
-            font-size: 0.9rem;
-        }
-
-        label:active {
-            background: rgba(0, 242, 255, 0.2);
-            border-color: var(--accent-cyan);
-        }
-
-        input[type="radio"] {
-            accent-color: var(--accent-cyan);
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .btn-finish {
+        .btn-scroll {
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-gold));
+            padding: 15px;
+            background-color: var(--accent);
+            color: var(--papiro);
             border: none;
-            border-radius: 15px;
-            color: #000;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 100, 0, 0.3);
-            margin-top: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
 
-        /* MODAL */
+        .btn-scroll:active {
+            transform: scale(0.98);
+        }
+
+        /* MODAL GABARITO */
         .modal {
             display: none;
             position: fixed;
             z-index: 1000;
             inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.9);
             padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-content {
-            background: #0a0a0f;
-            margin: 30% auto;
-            padding: 40px 20px;
-            border-radius: 25px;
+            background-color: var(--papiro);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 2px;
+            max-width: 500px;
+            border: 3px double var(--accent);
+            font-family: 'Special Elite', cursive;
+            color: var(--ink);
+        }
+
+        .gabarito-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
             text-align: center;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
-            animation: slideUp 0.4s ease-out;
         }
 
-        #nota-final {
-            font-size: 80px;
-            font-weight: 800;
-            display: block;
-            margin: 10px 0;
-            text-shadow: 0 0 20px currentColor;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .gabarito-item {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid var(--papiro-dark);
         }
 
         @media (min-width: 768px) {
-            .quiz-container { padding: 40px; }
             h1 { font-size: 2.2rem; }
-            label:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent-cyan); }
+            .pergaminho { padding: 60px 50px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="quiz-container">
-        <h1>🏗️ Neemias (Caps 1-8)</h1>
+    <div class="pergaminho">
+        <h1>📜 Memoriais de Neemias</h1>
         
-        <div class="user-section">
-            <p style="margin:0 0 10px 0; font-weight: 600; color: var(--neon-gold);">NOME DO SOLDADO:</p>
-            <input type="text" id="nome-aluno" placeholder="Digite seu nome...">
+        <div class="user-info">
+            <p style="margin: 0 0 5px 0;">Nome do Escriba:</p>
+            <input type="text" id="nome-escriba" placeholder="Escreva seu nome...">
         </div>
 
-        <form id="quiz-form">
-            <!-- Questão 1 -->
-            <div class="question">
-                <p>1. Em que mês Neemias recebeu as notícias sobre as ruínas de Jerusalém? (Ne 1:1)</p>
-                <label><input type="radio" name="q1" value="0"> Nisã</label>
-                <label><input type="radio" name="q1" value="1"> Quisleu</label>
-                <label><input type="radio" name="q1" value="0"> Elul</label>
-                <label><input type="radio" name="q1" value="0"> Adar</label>
-                <label><input type="radio" name="q1" value="0"> Sivã</label>
+        <form id="quiz-papiro">
+            <div class="question-block">
+                <p>1. Ao ouvir sobre a miséria de Jerusalém, Neemias apresenta uma oração de arrependimento. Quais são os elementos principais dessa oração no Capítulo 1?</p>
+                <textarea id="res1"></textarea>
             </div>
 
-            <!-- Questão 2 -->
-            <div class="question">
-                <p>2. Quem era o pai de Neemias? (Ne 1:1)</p>
-                <label><input type="radio" name="q2" value="0"> Hanani</label>
-                <label><input type="radio" name="q2" value="0"> Azur</label>
-                <label><input type="radio" name="q2" value="1"> Hacalias</label>
-                <label><input type="radio" name="q2" value="0"> Mesulão</label>
-                <label><input type="radio" name="q2" value="0"> Baaná</label>
+            <div class="question-block">
+                <p>2. Como Neemias respondeu à oposição e zombaria de Sambalate e Tobias enquanto os muros estavam na metade de sua altura? (Ne 4:4-9)</p>
+                <textarea id="res2"></textarea>
             </div>
 
-            <!-- Questão 3 -->
-            <div class="question">
-                <p>3. Qual foi a reação imediata de Neemias ao ouvir que os muros estavam derribados? (Ne 1:4)</p>
-                <label><input type="radio" name="q3" value="0"> Pediu audiência com o rei</label>
-                <label><input type="radio" name="q3" value="0"> Reuniu um exército</label>
-                <label><input type="radio" name="q3" value="0"> Fugiu para o deserto</label>
-                <label><input type="radio" name="q3" value="1"> Assentou-se, chorou e jejuou</label>
-                <label><input type="radio" name="q3" value="0"> Escreveu uma carta a Esdras</label>
+            <div class="question-block">
+                <p>3. Qual foi o impacto espiritual sobre o povo quando Esdras leu a Lei e Neemias os instruiu sobre a alegria do Senhor no Capítulo 8?</p>
+                <textarea id="res3"></textarea>
             </div>
 
-            <!-- Questão 4 -->
-            <div class="question">
-                <p>4. Além de Sambalate e Tobias, qual outro personagem zombou dos judeus? (Ne 2:19)</p>
-                <label><input type="radio" name="q4" value="0"> Sanasibe</label>
-                <label><input type="radio" name="q4" value="1"> Gesém, o árabe</label>
-                <label><input type="radio" name="q4" value="0"> Reum, o comandante</label>
-                <label><input type="radio" name="q4" value="0"> Sisa, o escriba</label>
-                <label><input type="radio" name="q4" value="0"> Tatnai, o governador</label>
-            </div>
-
-            <!-- Questão 5 -->
-            <div class="question">
-                <p>5. Quem foi o sumo sacerdote que ajudou na reconstrução da Porta das Ovelhas? (Ne 3:1)</p>
-                <label><input type="radio" name="q5" value="1"> Eliasibe</label>
-                <label><input type="radio" name="q5" value="0"> Joiada</label>
-                <label><input type="radio" name="q5" value="0"> Josué</label>
-                <label><input type="radio" name="q5" value="0"> Zadque</label>
-                <label><input type="radio" name="q5" value="0"> Hilquias</label>
-            </div>
-
-            <!-- Questão 6 -->
-            <div class="question">
-                <p>6. De onde vinham os homens que ajudaram na obra, mas cujos nobres não se sujeitaram ao serviço? (Ne 3:5)</p>
-                <label><input type="radio" name="q6" value="0"> Jericó</label>
-                <label><input type="radio" name="q6" value="1"> Tecoa</label>
-                <label><input type="radio" name="q6" value="0"> Gibeão</label>
-                <label><input type="radio" name="q6" value="0"> Mizpá</label>
-                <label><input type="radio" name="q6" value="0"> Zanoa</label>
-            </div>
-
-            <!-- Questão 7 -->
-            <div class="question">
-                <p>7. Qual era a distância que Sambalate e Tobias queriam que Neemias percorresse para se encontrar com eles no vale de Ono? (Ne 6:2)</p>
-                <label><input type="radio" name="q7" value="0"> Para uma festa</label>
-                <label><input type="radio" name="q7" value="0"> Para um julgamento</label>
-                <label><input type="radio" name="q7" value="1"> Para uma conferência (cilada)</label>
-                <label><input type="radio" name="q7" value="0"> Para entregar tributos</label>
-                <label><input type="radio" name="q7" value="0"> Para assinar um pacto</label>
-            </div>
-
-            <!-- Questão 8 -->
-            <div class="question">
-                <p>8. Em que mês o muro foi terminado? (Ne 6:15)</p>
-                <label><input type="radio" name="q8" value="0"> Tamuz</label>
-                <label><input type="radio" name="q8" value="0"> Ab</label>
-                <label><input type="radio" name="q8" value="1"> Elul</label>
-                <label><input type="radio" name="q8" value="0"> Etanim</label>
-                <label><input type="radio" name="q8" value="0"> Tebete</label>
-            </div>
-
-            <!-- Questão 9 -->
-            <div class="question">
-                <p>9. Quanto tempo Esdras leu o Livro da Lei diante do povo? (Ne 8:3)</p>
-                <label><input type="radio" name="q9" value="0"> Por uma hora</label>
-                <label><input type="radio" name="q9" value="0"> O dia inteiro</label>
-                <label><input type="radio" name="q9" value="1"> Desde a alva até ao meio-dia</label>
-                <label><input type="radio" name="q9" value="0"> Por sete dias seguidos</label>
-                <label><input type="radio" name="q9" value="0"> Apenas durante o sacrifício</label>
-            </div>
-
-            <!-- Questão 10 -->
-            <div class="question">
-                <p>10. Qual foi o local onde todo o povo se reuniu como um só homem para ouvir a Lei? (Ne 8:1)</p>
-                <label><input type="radio" name="q10" value="0"> No Templo</label>
-                <label><input type="radio" name="q10" value="1"> Na praça diante da porta das águas</label>
-                <label><input type="radio" name="q10" value="0"> No monte das Oliveiras</label>
-                <label><input type="radio" name="q10" value="0"> No palácio do governador</label>
-                <label><input type="radio" name="q10" value="0"> Junto ao ribeiro de Cedrom</label>
-            </div>
-
-            <button type="button" class="btn-finish" onclick="finalizar()">FINALIZAR PROVA</button>
+            <button type="button" class="btn-scroll" onclick="revelarVerdade()">Revelar Gabarito</button>
         </form>
     </div>
 
-    <div id="modal-result" class="modal">
+    <!-- MODAL -->
+    <div id="modal-gabarito" class="modal">
         <div class="modal-content">
-            <p id="msg-final"></p>
-            <span id="nota-final">0</span>
-            <p id="sub-msg"></p>
-            <button onclick="location.reload()" style="background: var(--accent-cyan); color: #000; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;">Tentar Novamente</button>
+            <h2 class="gabarito-title">Gabarito da Lei</h2>
+            <p id="saudacao" style="font-weight: bold; text-align: center;"></p>
+            
+            <div class="gabarito-item">
+                <p><strong>R1:</strong> Confissão de pecados (próprios e do povo), reconhecimento da fidelidade de Deus e súplica para que Deus ouvisse seu pedido diante do Rei Artaxerxes.</p>
+            </div>
+
+            <div class="gabarito-item">
+                <p><strong>R2:</strong> Ele orou a Deus pedindo justiça e fortificou a guarda, colocando o povo alerta com armas, vigiando dia e noite.</p>
+            </div>
+
+            <div class="gabarito-item">
+                <p><strong>R3:</strong> O povo chorou ao ouvir a Lei (arrependimento), mas Neemias os ensinou que não deveriam estar tristes, pois a alegria do Senhor era a força deles, resultando em celebração e generosidade.</p>
+            </div>
+
+            <button class="btn-scroll" style="margin-top: 25px;" onclick="fechar()">Voltar ao Estudo</button>
         </div>
     </div>
 
     <script>
-        function finalizar() {
-            const nome = document.getElementById('nome-aluno').value.trim();
-            if (!nome) { alert("Por favor, digite seu nome!"); return; }
-
-            let nota = 0;
-            for (let i = 1; i <= 10; i++) {
-                const res = document.querySelector(`input[name="q${i}"]:checked`);
-                if (res) nota += parseInt(res.value);
+        function revelarVerdade() {
+            const nome = document.getElementById('nome-escriba').value.trim();
+            if (!nome) {
+                alert("Identifique o escriba antes de consultar a lei.");
+                return;
             }
 
-            const modal = document.getElementById('modal-result');
-            const msg = document.getElementById('msg-final');
-            const displayNota = document.getElementById('nota-final');
-            const sub = document.getElementById('sub-msg');
+            document.getElementById('saudacao').innerText = "Ouça, escriba " + nome + ":";
+            document.getElementById('modal-gabarito').style.display = "block";
+        }
 
-            displayNota.innerText = nota;
-
-            if (nota >= 7) {
-                msg.innerHTML = `🌟 Parabéns, <strong>${nome}</strong>!`;
-                displayNota.style.color = "var(--accent-cyan)";
-                sub.innerText = `Sua nota é ${nota}. Você é um mestre na história de Neemias!`;
-            } else {
-                msg.innerHTML = `Poxa, <strong>${nome}</strong>...`;
-                displayNota.style.color = "var(--neon-orange)";
-                sub.innerText = `Sua nota é ${nota}. Se comprometa mais com a palavra de Deus!`;
-            }
-
-            modal.style.display = "block";
+        function fechar() {
+            document.getElementById('modal-gabarito').style.display = "none";
         }
     </script>
 </body>
