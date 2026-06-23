@@ -6,10 +6,10 @@
     <title>Meu Propósito, Minha Missão, Meu Futuro</title>
     <style>
         :root {
-            --primary-color: #00a896; /* Turquesa vibrante */
-            --secondary-color: #028090; /* Azul oceano */
-            --accent-color: #f0a500; /* Amarelo Sol para destaques */
-            --bg-color: #f4f7f6; /* Fundo suave e limpo */
+            --primary-color: #00a896; 
+            --secondary-color: #028090; 
+            --accent-color: #f0a500; 
+            --bg-color: #f4f7f6; 
             --card-bg: #ffffff;
             --text-color: #2b2d42;
             --border-color: #e0e0e0;
@@ -131,62 +131,18 @@
             border-bottom: 2px solid var(--primary-color);
         }
 
-        /* Transformação da tabela para telas pequenas (Celular) */
         @media (max-width: 600px) {
-            table, thead, tbody, th, td, tr { 
-                display: block; 
-            }
-            
-            thead tr { 
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            
-            tr { 
-                border: 2px solid var(--primary-color); 
-                border-radius: 8px;
-                margin-bottom: 15px; 
-                padding: 10px;
-                background: #fafafa;
-            }
-            
-            td { 
-                border: none;
-                border-bottom: 1px solid var(--border-color); 
-                position: relative;
-                padding-left: 35%; 
-                margin-bottom: 8px;
-            }
-            
-            td:last-child {
-                border-bottom: none;
-                margin-bottom: 0;
-            }
-            
-            td:before { 
-                position: absolute;
-                top: 12px;
-                left: 10px;
-                width: 30%; 
-                padding-right: 10px; 
-                white-space: nowrap;
-                font-weight: bold;
-                color: var(--secondary-color);
-            }
-            
-            /* Rótulos dinâmicos para o formato card no celular */
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            tr { border: 2px solid var(--primary-color); border-radius: 8px; margin-bottom: 15px; padding: 10px; background: #fafafa; }
+            td { border: none; border-bottom: 1px solid var(--border-color); position: relative; padding-left: 35%; margin-bottom: 8px; }
+            td:last-child { border-bottom: none; margin-bottom: 0; }
+            td:before { position: absolute; top: 12px; left: 10px; width: 30%; padding-right: 10px; white-space: nowrap; font-weight: bold; color: var(--secondary-color); }
             td:nth-of-type(1):before { content: "Objetivo:"; }
             td:nth-of-type(2):before { content: "Ação:"; }
             td:nth-of-type(3):before { content: "Prazo:"; }
             td:nth-of-type(4):before { content: "Ajuda:"; }
-
-            td input {
-                background: #fff;
-                padding: 6px;
-                border: 1px solid var(--border-color);
-                border-radius: 4px;
-            }
+            td input { background: #fff; padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; }
         }
 
         .quote {
@@ -208,7 +164,7 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, var(--accent-color), #e09600);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 15px 40px;
             border: none;
@@ -216,7 +172,7 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(240, 165, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(2, 128, 144, 0.3);
             transition: transform 0.2s, box-shadow 0.2s;
             width: 100%;
             max-width: 320px;
@@ -224,18 +180,96 @@
 
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(2, 128, 144, 0.4);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, var(--accent-color), #e09600);
+            box-shadow: 0 5px 15px rgba(240, 165, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .btn-pdf:hover {
             box-shadow: 0 8px 20px rgba(240, 165, 0, 0.4);
         }
 
-        .btn:active {
+        .btn-close {
+            background: #e74c3c;
+            padding: 10px 25px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Estilos do POP-UP (Modal) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
             transform: translateY(0);
+        }
+
+        .modal-box h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .bible-verse {
+            font-style: italic;
+            font-size: 16px;
+            color: #555;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-top: 3px solid var(--accent-color);
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        .bible-ref {
+            display: block;
+            font-weight: bold;
+            margin-top: 8px;
+            color: var(--secondary-color);
         }
 
         /* Otimizações de Impressão */
         @media print {
             body { background: white; padding: 0; }
             .container { box-shadow: none; padding: 0; max-width: 100%; }
-            .btn { display: none; }
+            .actions, .modal-overlay { display: none !important; }
             textarea { border: none; border-bottom: 1px dotted #000; background: transparent; }
             h2 { background: #00a896 !important; color: white !important; -webkit-print-color-adjust: exact; }
             .quote { background: #fff9e6 !important; -webkit-print-color-adjust: exact; }
@@ -252,137 +286,51 @@
 
     <form id="formularioProposito">
         
+        <!-- PARTE 1 -->
         <h2>Parte 1 – Minha identidade</h2>
-        
-        <div class="form-group">
-            <label>1. Quem sou eu?</label>
-            <textarea name="q1"></textarea>
-        </div>
-        <div class="form-group">
-            <label>2. Como me descreveria em cinco palavras?</label>
-            <textarea name="q2"></textarea>
-        </div>
-        <div class="form-group">
-            <label>3. Quais qualidades Deus me deu?</label>
-            <textarea name="q3"></textarea>
-        </div>
-        <div class="form-group">
-            <label>4. Quais dificuldades preciso melhorar em relação a administração do meu tempo?</label>
-            <textarea name="q4"></textarea>
-        </div>
-        <div class="form-group">
-            <label>5. O que gosto de fazer no meu tempo livre?</label>
-            <textarea name="q5"></textarea>
-        </div>
-        <div class="form-group">
-            <label>6. O que me deixa feliz?</label>
-            <textarea name="q6"></textarea>
-        </div>
-        <div class="form-group">
-            <label>7. O que as pessoas dizem que faço bem?</label>
-            <textarea name="q7"></textarea>
-        </div>
-        <div class="form-group">
-            <label>8. Qual é meu maior sonho hoje?</label>
-            <textarea name="q8"></textarea>
-        </div>
+        <div class="form-group"><label>1. Quem sou eu?</label><textarea name="q1"></textarea></div>
+        <div class="form-group"><label>2. Como me descreveria em cinco palavras?</label><textarea name="q2"></textarea></div>
+        <div class="form-group"><label>3. Quais qualidades Deus me deu?</label><textarea name="q3"></textarea></div>
+        <div class="form-group"><label>4. Quais dificuldades preciso melhorar em relação a administração do meu tempo?</label><textarea name="q4"></textarea></div>
+        <div class="form-group"><label>5. O que gosto de fazer no meu tempo livre?</label><textarea name="q5"></textarea></div>
+        <div class="form-group"><label>6. O que me deixa feliz?</label><textarea name="q6"></textarea></div>
+        <div class="form-group"><label>7. O que as pessoas dizem que faço bem?</label><textarea name="q7"></textarea></div>
+        <div class="form-group"><label>8. Qual é meu maior sonho hoje?</label><textarea name="q8"></textarea></div>
 
+        <!-- PARTE 2 -->
         <h2>Parte 2 – Minha fé e meu propósito</h2>
-        
-        <div class="form-group">
-            <label>9. O que significa servir a Deus através da profissão?</label>
-            <textarea name="q9"></textarea>
-        </div>
-        <div class="form-group">
-            <label>10. Como minha fé influencia minhas decisões?</label>
-            <textarea name="q10"></textarea>
-        </div>
-        <div class="form-group">
-            <label>11. Que valores cristãos considero indispensáveis?</label>
-            <textarea name="q11"></textarea>
-        </div>
-        <div class="form-group">
-            <label>12. Como desejo ser lembrado pelas pessoas?</label>
-            <textarea name="q12"></textarea>
-        </div>
-        <div class="form-group">
-            <label>13. Como posso impactar outras vidas?</label>
-            <textarea name="q13"></textarea>
-        </div>
+        <div class="form-group"><label>9. O que significa servir a Deus através da profissão?</label><textarea name="q9"></textarea></div>
+        <div class="form-group"><label>10. Como minha fé influencia minhas decisões?</label><textarea name="q10"></textarea></div>
+        <div class="form-group"><label>11. Que valores cristãos considero indispensáveis?</label><textarea name="q11"></textarea></div>
+        <div class="form-group"><label>12. Como desejo ser lembrado pelas pessoas?</label><textarea name="q12"></textarea></div>
+        <div class="form-group"><label>13. Como posso impactar outras vidas?</label><textarea name="q13"></textarea></div>
 
+        <!-- PARTE 3 -->
         <h2>Parte 3 – Descobrindo meus talentos</h2>
-        
-        <div class="form-group">
-            <label>14. Quais atividades faço com facilidade?</label>
-            <textarea name="q14"></textarea>
-        </div>
-        <div class="form-group">
-            <label>15. O que eu faria mesmo sem receber dinheiro?</label>
-            <textarea name="q15"></textarea>
-        </div>
-        <div class="form-group">
-            <label>16. Quais matérias escolares mais gosto?</label>
-            <textarea name="q16"></textarea>
-        </div>
-        <div class="form-group">
-            <label>17. Em quais situações costumo ajudar as pessoas?</label>
-            <textarea name="q17"></textarea>
-        </div>
-        <div class="form-group">
-            <label>18. Que profissão desperta meu interesse?</label>
-            <textarea name="q18"></textarea>
-        </div>
+        <div class="form-group"><label>14. Quais atividades faço com facilidade?</label><textarea name="q14"></textarea></div>
+        <div class="form-group"><label>15. O que eu faria mesmo sem receber dinheiro?</label><textarea name="q15"></textarea></div>
+        <div class="form-group"><label>16. Quais matérias escolares mais gosto?</label><textarea name="q16"></textarea></div>
+        <div class="form-group"><label>17. Em quais situações costumo ajudar as pessoas?</label><textarea name="q17"></textarea></div>
+        <div class="form-group"><label>18. Que profissão desperta meu interesse?</label><textarea name="q18"></textarea></div>
 
+        <!-- PARTE 4 -->
         <h2>Parte 4 – Planejamento profissional</h2>
-        
-        <div class="form-group">
-            <label>19. Qual profissão desejo seguir?</label>
-            <textarea name="q19"></textarea>
-        </div>
-        <div class="form-group">
-            <label>20. Por que escolhi essa profissão?</label>
-            <textarea name="q20"></textarea>
-        </div>
-        <div class="form-group">
-            <label>21. O que preciso estudar para alcançá-la?</label>
-            <textarea name="q21"></textarea>
-        </div>
-        <div class="form-group">
-            <label>22. Que habilidades preciso desenvolver?</label>
-            <textarea name="q22"></textarea>
-        </div>
-        <div class="form-group">
-            <label>23. Quem pode me orientar?</label>
-            <textarea name="q23"></textarea>
-        </div>
-        <div class="form-group">
-            <label>24. Que obstáculos podem surgir?</label>
-            <textarea name="q24"></textarea>
-        </div>
-        <div class="form-group">
-            <label>25. Como posso me preparar desde agora?</label>
-            <textarea name="q25"></textarea>
-        </div>
+        <div class="form-group"><label>19. Qual profissão desejo seguir?</label><textarea name="q19"></textarea></div>
+        <div class="form-group"><label>20. Por que escolhi essa profissão?</label><textarea name="q20"></textarea></div>
+        <div class="form-group"><label>21. O que preciso estudar para alcançá-la?</label><textarea name="q21"></textarea></div>
+        <div class="form-group"><label>22. Que habilidades preciso desenvolver?</label><textarea name="q22"></textarea></div>
+        <div class="form-group"><label>23. Quem pode me orientar?</label><textarea name="q23"></textarea></div>
+        <div class="form-group"><label>24. Que obstáculos podem surgir?</label><textarea name="q24"></textarea></div>
+        <div class="form-group"><label>25. Como posso me preparar desde agora?</label><textarea name="q25"></textarea></div>
 
+        <!-- PARTE 5 -->
         <h2>Parte 5 – Metas</h2>
-        
-        <div class="form-group">
-            <label>26. Curto prazo (até 1 ano): O que quero conquistar?</label>
-            <textarea name="q26"></textarea>
-        </div>
-        <div class="form-group">
-            <label>27. Médio prazo (2–5 anos): Onde quero estar?</label>
-            <textarea name="q27"></textarea>
-        </div>
-        <div class="form-group">
-            <label>28. Longo prazo (5–10 anos): Como imagino minha vida?</label>
-            <textarea name="q28"></textarea>
-        </div>
-        <div class="form-group">
-            <label>29. Que legado desejo deixar?</label>
-            <textarea name="q29"></textarea>
-        </div>
+        <div class="form-group"><label>26. Curto prazo (até 1 ano): O que quero conquistar?</label><textarea name="q26"></textarea></div>
+        <div class="form-group"><label>27. Médio prazo (2–5 anos): Onde quero estar?</label><textarea name="q27"></textarea></div>
+        <div class="form-group"><label>28. Longo prazo (5–10 anos): Como imagino minha vida?</label><textarea name="q28"></textarea></div>
+        <div class="form-group"><label>29. Que legado desejo deixar?</label><textarea name="q29"></textarea></div>
 
+        <!-- PARTE 6 -->
         <h2>Parte 6 – Meu plano de ação</h2>
         <table>
             <thead>
@@ -415,34 +363,61 @@
             </tbody>
         </table>
 
+        <!-- PARTE 7 -->
         <h2>Parte 7 – Minha oração e compromisso</h2>
-        
-        <div class="form-group">
-            <label>● O que entrego nas mãos de Deus hoje?</label>
-            <textarea name="q30"></textarea>
-        </div>
-        <div class="form-group">
-            <label>● Que mudança quero iniciar na minha vida?</label>
-            <textarea name="q31"></textarea>
-        </div>
-        <div class="form-group">
-            <label>● Que compromisso assumo comigo e com Deus?</label>
-            <textarea name="q32"></textarea>
-        </div>
-        <div class="form-group">
-            <label>● Escreva uma oração pelo seu futuro.</label>
-            <textarea name="q33" style="min-height: 120px;"></textarea>
-        </div>
+        <div class="form-group"><label>● O que entrego nas mãos de Deus hoje?</label><textarea name="q30"></textarea></div>
+        <div class="form-group"><label>● Que mudança quero iniciar na minha vida?</label><textarea name="q31"></textarea></div>
+        <div class="form-group"><label>● Que compromisso assumo comigo e com Deus?</label><textarea name="q32"></textarea></div>
+        <div class="form-group"><label>● Escreva uma oração pelo seu futuro.</label><textarea name="q33" style="min-height: 120px;"></textarea></div>
 
         <div class="quote">
             "O sucesso não é somente ter uma profissão, mas viver o propósito que Deus preparou para sua vida através dela"
         </div>
 
+        <!-- BOTÃO FINALIZAR -->
         <div class="actions">
-            <button type="button" class="btn" onclick="window.print()">Salvar / Criar PDF</button>
+            <button type="button" class="btn" onclick="toggleModal(true)">Finalizar Reflexão</button>
         </div>
     </form>
 </div>
+
+<!-- POP-UP MODAL -->
+<div class="modal-overlay" id="modalReflexao">
+    <div class="modal-box">
+        <h3>Parabéns por concluir!</h3>
+        <p>Sua jornada e planejamento estão entregues nas melhores mãos.</p>
+        
+        <div class="bible-verse">
+            "Porque sou eu que conheço os planos que tenho para vocês', diz o Senhor, 'planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro."
+            <span class="bible-ref">Jeremias 29:11</span>
+        </div>
+
+        <p>Clique abaixo para salvar o seu mapa de propósito em formato PDF ou imprimir.</p>
+        
+        <button type="button" class="btn btn-pdf" onclick="gerarPDF()">Salvar em PDF</button>
+        <button type="button" class="btn btn-close" onclick="toggleModal(false)">Voltar ao Formulário</button>
+    </div>
+</div>
+
+<script>
+    function toggleModal(show) {
+        const modal = document.getElementById('modalReflexao');
+        if (show) {
+            modal.classList.add('active');
+        } else {
+            modal.classList.remove('active');
+        }
+    }
+
+    function gerarPDF() {
+        // Fecha o modal rapidamente para não atrapalhar a captura da tela de impressão
+        toggleModal(false);
+        // Pequeno atraso para dar tempo do modal sumir antes do comando de impressão disparar
+        setTimeout(() => {
+            window.print();
+        }, 300);
+    }
+</script>
 
 </body>
 </html>
