@@ -1,316 +1,370 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prova Neemias | IAMA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+    <title>Meu Propósito, Minha Missão, Meu Futuro</title>
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --neon-gold: #ffce00;
-            --neon-orange: #ff5e00;
-            --bg-dark: #05050a;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            --primary-color: #2c3e50;
+            --accent-color: #34495e;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #bdc3c7;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top right, #1e1b4b, #050505);
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
-            padding: 10px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            padding: 20px;
         }
 
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 25px 15px;
-            width: 100%;
-            max-width: 650px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
-            margin: auto;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         h1 {
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            background: #eaeded;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 20px;
+            margin-top: 35px;
+        }
+
+        .form-group {
             margin-bottom: 25px;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, var(--neon-gold), var(--neon-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 8px rgba(255, 150, 0, 0.4));
-        }
-
-        .user-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 206, 0, 0.2);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid var(--neon-gold);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .question {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .question p {
-            font-weight: 600;
-            color: var(--neon-blue);
-            margin-bottom: 15px;
         }
 
         label {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            margin: 8px 0;
-            padding: 12px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid transparent;
-            font-size: 0.9rem;
-        }
-
-        label:active {
-            background: rgba(0, 242, 255, 0.2);
-            border-color: var(--neon-blue);
-        }
-
-        input[type="radio"] {
-            accent-color: var(--neon-blue);
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-        }
-
-        .btn-finish {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-gold));
-            border: none;
-            border-radius: 15px;
-            color: #000;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 100, 0, 0.3);
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(15px);
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: #0a0a0f;
-            margin: 20% auto;
-            padding: 40px 20px;
-            border-radius: 25px;
-            text-align: center;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
-            animation: slideUp 0.4s ease-out;
-        }
-
-        #nota-final {
-            font-size: 80px;
-            font-weight: 800;
             display: block;
-            margin: 10px 0;
-            text-shadow: 0 0 20px currentColor;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
         }
 
-        .btn-retry {
-            background: var(--neon-blue);
-            color: #000;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: bold;
+        textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* Estilo da Tabela Parte 6 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f4f4;
+            color: var(--primary-color);
+        }
+
+        td input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        td input:focus {
+            outline: none;
+        }
+
+        .quote {
+            text-align: center;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--primary-color);
+            margin: 40px 0;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background: #f2f4f4;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1a252f;
+        }
+
+        /* Ajustes para Impressão / Salvar PDF */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; }
+            .btn { display: none; }
+            textarea { border: none; border-bottom: 1px dotted #000; background: transparent; }
+            h2 { background: #eee; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
-    <div class="quiz-container">
-        <h1>Prova Neemias | IAMA</h1>
+<div class="container">
+    <header>
+        <h1>Meu Propósito, Minha Missão, Meu Futuro (Profissional)</h1>
+        <p>Reflexão guiada para planejamento de vida e carreira</p>
+    </header>
+
+    <form id="formularioProposito">
         
-        <div class="user-section">
-    <p style="margin:0 0 10px 0; font-weight: 600; color: var(--neon-gold); text-transform: uppercase; letter-spacing: 1px;">
-        ⚔️ Identifique-se, reconstrutor:
-    </p>
-    <input type="text" id="nome-aluno" placeholder="Escreva seu nome aqui...">
+        <!-- PARTE 1 -->
+        <h2>Parte 1 – Minha identidade</h2>
+        
+        <div class="form-group">
+            <label>1. Quem sou eu?</label>
+            <textarea name="q1"></textarea>
+        </div>
+        <div class="form-group">
+            <label>2. Como me descreveria em cinco palavras?</label>
+            <textarea name="q2"></textarea>
+        </div>
+        <div class="form-group">
+            <label>3. Quais qualidades Deus me deu?</label>
+            <textarea name="q3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>4. Quais dificuldades preciso melhorar em relação a administração do meu tempo?</label>
+            <textarea name="q4"></textarea>
+        </div>
+        <div class="form-group">
+            <label>5. O que gosto de fazer no meu tempo livre?</label>
+            <textarea name="q5"></textarea>
+        </div>
+        <div class="form-group">
+            <label>6. O que me deixa feliz?</label>
+            <textarea name="q6"></textarea>
+        </div>
+        <div class="form-group">
+            <label>7. O que as pessoas dizem que faço bem?</label>
+            <textarea name="q7"></textarea>
+        </div>
+        <div class="form-group">
+            <label>8. Qual é meu maior sonho hoje?</label>
+            <textarea name="q8"></textarea>
+        </div>
+
+        <!-- PARTE 2 -->
+        <h2>Parte 2 – Minha fé e meu propósito</h2>
+        
+        <div class="form-group">
+            <label>9. O que significa servir a Deus através da profissão?</label>
+            <textarea name="q9"></textarea>
+        </div>
+        <div class="form-group">
+            <label>10. Como minha fé influencia minhas decisões?</label>
+            <textarea name="q10"></textarea>
+        </div>
+        <div class="form-group">
+            <label>11. Que valores cristãos considero indispensáveis?</label>
+            <textarea name="q11"></textarea>
+        </div>
+        <div class="form-group">
+            <label>12. Como desejo ser lembrado pelas pessoas?</label>
+            <textarea name="q12"></textarea>
+        </div>
+        <div class="form-group">
+            <label>13. Como posso impactar outras vidas?</label>
+            <textarea name="q13"></textarea>
+        </div>
+
+        <!-- PARTE 3 -->
+        <h2>Parte 3 – Descobrindo meus talentos</h2>
+        
+        <div class="form-group">
+            <label>14. Quais atividades faço com facilidade?</label>
+            <textarea name="q14"></textarea>
+        </div>
+        <div class="form-group">
+            <label>15. O que eu faria mesmo sem receber dinheiro?</label>
+            <textarea name="q15"></textarea>
+        </div>
+        <div class="form-group">
+            <label>16. Quais matérias escolares mais gosto?</label>
+            <textarea name="q16"></textarea>
+        </div>
+        <div class="form-group">
+            <label>17. Em quais situações costumo ajudar as pessoas?</label>
+            <textarea name="q17"></textarea>
+        </div>
+        <div class="form-group">
+            <label>18. Que profissão desperta meu interesse?</label>
+            <textarea name="q18"></textarea>
+        </div>
+
+        <!-- PARTE 4 -->
+        <h2>Parte 4 – Planejamento profissional</h2>
+        
+        <div class="form-group">
+            <label>19. Qual profissão desejo seguir?</label>
+            <textarea name="q19"></textarea>
+        </div>
+        <div class="form-group">
+            <label>20. Por que escolhi essa profissão?</label>
+            <textarea name="q20"></textarea>
+        </div>
+        <div class="form-group">
+            <label>21. O que preciso estudar para alcançá-la?</label>
+            <textarea name="q21"></textarea>
+        </div>
+        <div class="form-group">
+            <label>22. Que habilidades preciso desenvolver?</label>
+            <textarea name="q22"></textarea>
+        </div>
+        <div class="form-group">
+            <label>23. Quem pode me orientar?</label>
+            <textarea name="q23"></textarea>
+        </div>
+        <div class="form-group">
+            <label>24. Que obstáculos podem surgir?</label>
+            <textarea name="q24"></textarea>
+        </div>
+        <div class="form-group">
+            <label>25. Como posso me preparar desde agora?</label>
+            <textarea name="q25"></textarea>
+        </div>
+
+        <!-- PARTE 5 -->
+        <h2>Parte 5 – Metas</h2>
+        
+        <div class="form-group">
+            <label>26. Curto prazo (até 1 ano): O que quero conquistar?</label>
+            <textarea name="q26"></textarea>
+        </div>
+        <div class="form-group">
+            <label>27. Médio prazo (2–5 anos): Onde quero estar?</label>
+            <textarea name="q27"></textarea>
+        </div>
+        <div class="form-group">
+            <label>28. Longo prazo (5–10 anos): Como imagino minha vida?</label>
+            <textarea name="q28"></textarea>
+        </div>
+        <div class="form-group">
+            <label>29. Que legado desejo deixar?</label>
+            <textarea name="q29"></textarea>
+        </div>
+
+        <!-- PARTE 6 -->
+        <h2>Parte 6 – Meu plano de ação</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Objetivo</th>
+                    <th>Ação</th>
+                    <th>Prazo</th>
+                    <th>Quem pode ajudar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" placeholder="Ex: Passar no vestibular"></td>
+                    <td><input type="text" placeholder="Ex: Estudar 3h por dia"></td>
+                    <td><input type="text" placeholder="Ex: Dezembro/2026"></td>
+                    <td><input type="text" placeholder="Ex: Meus pais e professores"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- PARTE 7 -->
+        <h2>Parte 7 – Minha oração e compromisso</h2>
+        
+        <div class="form-group">
+            <label>● O que entrego nas mãos de Deus hoje?</label>
+            <textarea name="q30"></textarea>
+        </div>
+        <div class="form-group">
+            <label>● Que mudança quero iniciar na minha vida?</label>
+            <textarea name="q31"></textarea>
+        </div>
+        <div class="form-group">
+            <label>● Que compromisso assumo comigo e com Deus?</label>
+            <textarea name="q32"></textarea>
+        </div>
+        <div class="form-group">
+            <label>● Escreva uma oração pelo seu futuro.</label>
+            <textarea name="q33" style="min-height: 120px;"></textarea>
+        </div>
+
+        <div class="quote">
+            "O sucesso não é somente ter uma profissão, mas viver o propósito que Deus preparou para sua vida através dela"
+        </div>
+
+        <div class="actions">
+            <button type="button" class="btn" onclick="window.print()">Salvar Respostas / Imprimir PDF</button>
+        </div>
+    </form>
 </div>
 
-        <form id="quiz-form">
-            <div class="question">
-                <p>1. Qual era o cargo de Neemias diante do rei Artaxerxes?</p>
-                <label><input type="radio" name="q1" value="0"> Sacerdote</label>
-                <label><input type="radio" name="q1" value="1"> Copeiro</label>
-                <label><input type="radio" name="q1" value="0"> Capitão</label>
-                <label><input type="radio" name="q1" value="0"> Escriba</label>
-            </div>
-
-            <div class="question">
-                <p>2. De qual cidade Neemias recebeu más notícias?</p>
-                <label><input type="radio" name="q2" value="0"> Babilônia</label>
-                <label><input type="radio" name="q2" value="1"> Jerusalém</label>
-                <label><input type="radio" name="q2" value="0"> Nínive</label>
-                <label><input type="radio" name="q2" value="0"> Roma</label>
-            </div>
-
-            <div class="question">
-                <p>3. O que Neemias fez primeiro ao saber da destruição dos muros?</p>
-                <label><input type="radio" name="q3" value="1"> Chorou, jejuou e orou</label>
-                <label><input type="radio" name="q3" value="0"> Pediu dinheiro ao rei</label>
-                <label><input type="radio" name="q3" value="0"> Fugiu para o deserto</label>
-                <label><input type="radio" name="q3" value="0"> Começou a construir sozinho</label>
-            </div>
-
-            <div class="question">
-                <p>4. Quem foram os dois principais opositores da obra?</p>
-                <label><input type="radio" name="q4" value="0"> Saul e Jônatas</label>
-                <label><input type="radio" name="q4" value="1"> Sambalate e Tobias</label>
-                <label><input type="radio" name="q4" value="0"> Acabe e Jezabel</label>
-                <label><input type="radio" name="q4" value="0"> Faraó e Golias</label>
-            </div>
-
-            <div class="question">
-                <p>5. Como o povo trabalhava para evitar ataques?</p>
-                <label><input type="radio" name="q5" value="0"> Trabalhavam apenas à noite</label>
-                <label><input type="radio" name="q5" value="1"> Com uma mão na obra e outra na arma</label>
-                <label><input type="radio" name="q5" value="0"> Contrataram mercenários</label>
-                <label><input type="radio" name="q5" value="0"> Construíram um fosso</label>
-            </div>
-
-            <div class="question">
-                <p>6. Em quantos dias a reconstrução do muro foi terminada?</p>
-                <label><input type="radio" name="q6" value="0"> 40 dias</label>
-                <label><input type="radio" name="q6" value="0"> 7 dias</label>
-                <label><input type="radio" name="q6" value="1"> 52 dias</label>
-                <label><input type="radio" name="q6" value="0"> 120 dias</label>
-            </div>
-
-            <div class="question">
-                <p>7. Qual era o nome do escriba que leu a Lei para o povo?</p>
-                <label><input type="radio" name="q7" value="1"> Esdras</label>
-                <label><input type="radio" name="q7" value="0"> Samuel</label>
-                <label><input type="radio" name="q7" value="0"> Isaías</label>
-                <label><input type="radio" name="q7" value="0"> Malaquias</label>
-            </div>
-
-            <div class="question">
-                <p>8. Qual frase famosa Neemias disse ao povo no capítulo 8?</p>
-                <label><input type="radio" name="q8" value="0"> O Senhor é meu pastor</label>
-                <label><input type="radio" name="q8" value="1"> A alegria do Senhor é a vossa força</label>
-                <label><input type="radio" name="q8" value="0"> Tudo posso naquele que me fortalece</label>
-                <label><input type="radio" name="q8" value="0"> Deus é amor</label>
-            </div>
-
-            <div class="question">
-                <p>9. O que Neemias proibiu os nobres de cobrarem do povo pobre?</p>
-                <label><input type="radio" name="q9" value="1"> Juros e usura</label>
-                <label><input type="radio" name="q9" value="0"> Ofertas</label>
-                <label><input type="radio" name="q9" value="0"> Entrada no Templo</label>
-                <label><input type="radio" name="q9" value="0"> Imposto de viagem</label>
-            </div>
-
-            <div class="question">
-                <p>10. Onde o povo se reuniu para ouvir a leitura da Lei?</p>
-                <label><input type="radio" name="q10" value="0"> No alto do muro</label>
-                <label><input type="radio" name="q10" value="1"> Na praça diante da Porta das Águas</label>
-                <label><input type="radio" name="q10" value="0"> No Jardim das Oliveiras</label>
-                <label><input type="radio" name="q10" value="0"> Dentro do palácio</label>
-            </div>
-
-            <button type="button" class="btn-finish" onclick="finalizar()">FINALIZAR PROVA</button>
-        </form>
-    </div>
-
-    <div id="modal-result" class="modal">
-        <div class="modal-content">
-            <p id="msg-final" style="font-size: 1.2rem;"></p>
-            <span id="nota-final">0</span>
-            <p id="sub-msg">Acertos de 10</p>
-            <button class="btn-retry" onclick="location.reload()">TENTAR NOVAMENTE</button>
-        </div>
-    </div>
-
-    <script>
-        function finalizar() {
-            const nome = document.getElementById('nome-aluno').value.trim();
-            if (!nome) { alert("Por favor, digite seu nome!"); return; }
-
-            let nota = 0;
-            const form = document.getElementById('quiz-form');
-            const data = new FormData(form);
-
-            for (let v of data.values()) {
-                nota += parseInt(v);
-            }
-
-            const modal = document.getElementById('modal-result');
-            const msg = document.getElementById('msg-final');
-            const displayNota = document.getElementById('nota-final');
-            const sub = document.getElementById('sub-msg');
-
-            displayNota.innerText = nota;
-
-            if (nota >= 7) {
-                msg.innerHTML = `🌟 Excelente, <strong>${nome}</strong>!`;
-                displayNota.style.color = "var(--neon-blue)";
-                sub.innerText = `Você acertou ${nota} de 10. Seus estudos são solidos como os muros de Jerusalém!`;
-            } else {
-                msg.innerHTML = `Continue estudando, <strong>${nome}</strong>!`;
-                displayNota.style.color = "var(--neon-orange)";
-                sub.innerText = `Você acertou ${nota} de 10. Tente ler Neemias 1-8 novamente.`;
-            }
-
-            modal.style.display = "block";
-        }
-    </script>
 </body>
 </html>
